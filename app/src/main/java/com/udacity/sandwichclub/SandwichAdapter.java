@@ -16,27 +16,31 @@ import com.udacity.sandwichclub.model.Sandwich;
 
 import java.util.List;
 
+import butterknife.BindView;
+import butterknife.ButterKnife;
+
 public class SandwichAdapter extends RecyclerView.Adapter<SandwichAdapter.SandwichHolder> {
 
     private List<Sandwich> sandwichList;
     private Context context;
-    private SandwicListener mSandwichListener;
+    private SandwichListener mSandwichListener;
 
-    public interface SandwicListener {
-        void onSandwichCliked(Sandwich sandwich);
+    public interface SandwichListener {
+        void onSandwichClicked(Sandwich sandwich);
     }
 
 
-    public SandwichAdapter(List<Sandwich> sandwichList, Context context, SandwicListener sandwicListener) {
+    public SandwichAdapter(List<Sandwich> sandwichList, Context context, SandwichListener sandwichListener) {
         this.sandwichList = sandwichList;
         this.context = context;
-        this.mSandwichListener = sandwicListener;
+        this.mSandwichListener = sandwichListener;
     }
 
     @NonNull
     @Override
     public SandwichHolder onCreateViewHolder(@NonNull ViewGroup parent, int i) {
         View v = LayoutInflater.from(parent.getContext()).inflate(R.layout.sandwich_card, parent, false);
+
         return new SandwichHolder(v);
     }
 
@@ -45,15 +49,15 @@ public class SandwichAdapter extends RecyclerView.Adapter<SandwichAdapter.Sandwi
         final Sandwich sandwich = sandwichList.get(i);
 
         if (sandwich.getMainName() != null && !TextUtils.isEmpty(sandwich.getMainName())) {
-            sandwichHolder.mSandiwchNameTextView.setText(sandwich.getMainName());
+            sandwichHolder.mSandwichNameTextView.setText(sandwich.getMainName());
         }
         if (sandwich.getImage() != null && !TextUtils.isEmpty(sandwich.getImage())) {
-            Picasso.with(context).load(sandwich.getImage()).placeholder(R.drawable.placeholder).into(sandwichHolder.mSandwichImageView);
+            Picasso.with(context).load(sandwich.getImage()).placeholder(R.drawable.placeholder).error(R.drawable.android_error).into(sandwichHolder.mSandwichImageView);
         }
         sandwichHolder.mSandwichWrapper.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                mSandwichListener.onSandwichCliked(sandwich);
+                mSandwichListener.onSandwichClicked(sandwich);
             }
         });
 
@@ -67,16 +71,16 @@ public class SandwichAdapter extends RecyclerView.Adapter<SandwichAdapter.Sandwi
 
     class SandwichHolder extends RecyclerView.ViewHolder {
 
+        @BindView(R.id.rl_sandwich_wrapper)
         RelativeLayout mSandwichWrapper;
+        @BindView(R.id.iv_sandwich)
         ImageView mSandwichImageView;
-        TextView mSandiwchNameTextView;
+        @BindView(R.id.tv_main_name)
+        TextView mSandwichNameTextView;
 
         SandwichHolder(@NonNull View itemView) {
             super(itemView);
-            mSandwichWrapper = itemView.findViewById(R.id.rl_sandwich_wrapper);
-            mSandiwchNameTextView = itemView.findViewById(R.id.tv_main_name);
-            mSandwichImageView = itemView.findViewById(R.id.iv_sandwich);
-
+            ButterKnife.bind(this, itemView);
         }
 
     }

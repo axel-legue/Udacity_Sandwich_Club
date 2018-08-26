@@ -12,11 +12,15 @@ import com.udacity.sandwichclub.utils.JsonUtils;
 import java.util.ArrayList;
 import java.util.List;
 
-public class MainActivity extends AppCompatActivity implements SandwichAdapter.SandwicListener {
+import butterknife.BindView;
+import butterknife.ButterKnife;
 
+public class MainActivity extends AppCompatActivity implements SandwichAdapter.SandwichListener {
+
+    @BindView(R.id.rv_sandwich)
     RecyclerView mSandwichRecyclerView;
-    SandwichAdapter mSandwichAdapter;
-    List<Sandwich> mSandwiches;
+    private SandwichAdapter mSandwichAdapter;
+    private List<Sandwich> mSandwiches;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -25,14 +29,11 @@ public class MainActivity extends AppCompatActivity implements SandwichAdapter.S
 
         initData();
         initView();
-
-
     }
 
     private void initData() {
 
         mSandwiches = new ArrayList<>();
-
 
         String[] sandwiches = getResources().getStringArray(R.array.sandwich_details);
         for (String sandwichJSON : sandwiches) {
@@ -42,7 +43,8 @@ public class MainActivity extends AppCompatActivity implements SandwichAdapter.S
     }
 
     private void initView() {
-        mSandwichRecyclerView = findViewById(R.id.rv_sandwich);
+
+        ButterKnife.bind(this);
 
         mSandwichAdapter = new SandwichAdapter(mSandwiches, this, this);
         mSandwichRecyclerView.setLayoutManager(new LinearLayoutManager(this));
@@ -51,7 +53,7 @@ public class MainActivity extends AppCompatActivity implements SandwichAdapter.S
     }
 
     @Override
-    public void onSandwichCliked(Sandwich sandwich) {
+    public void onSandwichClicked(Sandwich sandwich) {
         Intent intent = new Intent(this, DetailActivity.class);
         intent.putExtra(DetailActivity.SANDWICH_SELECTED, sandwich);
         startActivity(intent);

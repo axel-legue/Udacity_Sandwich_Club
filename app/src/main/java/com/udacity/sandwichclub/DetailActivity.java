@@ -14,14 +14,22 @@ import android.widget.Toast;
 import com.squareup.picasso.Picasso;
 import com.udacity.sandwichclub.model.Sandwich;
 
+import butterknife.BindView;
+import butterknife.ButterKnife;
+
 public class DetailActivity extends AppCompatActivity {
 
     public static final String SANDWICH_SELECTED = "sandwich_selected";
     private Sandwich mSandwichSelected;
+    @BindView(R.id.iv_sandwich)
     ImageView mSandwichImageView;
+    @BindView(R.id.tv_main_name)
     TextView mMainNameTextView;
+    @BindView(R.id.tv_also_known_as)
     TextView mAlsoKnownAsTextView;
+    @BindView(R.id.tv_description)
     TextView mDescriptionTextView;
+    @BindView(R.id.tv_ingredients)
     TextView mIngredientTextView;
 
 
@@ -50,11 +58,7 @@ public class DetailActivity extends AppCompatActivity {
     }
 
     private void initView() {
-        mSandwichImageView = findViewById(R.id.iv_sandwich);
-        mMainNameTextView = findViewById(R.id.tv_main_name);
-        mAlsoKnownAsTextView = findViewById(R.id.tv_also_known_as);
-        mDescriptionTextView = findViewById(R.id.tv_description);
-        mIngredientTextView = findViewById(R.id.tv_ingredients);
+        ButterKnife.bind(this);
     }
 
     private void closeOnError() {
@@ -65,7 +69,7 @@ public class DetailActivity extends AppCompatActivity {
     private void populateUI() {
         if (mSandwichSelected != null) {
             mMainNameTextView.setText(mSandwichSelected.getMainName());
-            Picasso.with(this).load(mSandwichSelected.getImage()).placeholder(R.drawable.placeholder).into(mSandwichImageView);
+            Picasso.with(this).load(mSandwichSelected.getImage()).placeholder(R.drawable.placeholder).error(R.drawable.android_error).into(mSandwichImageView);
 
             if (mSandwichSelected.getAlsoKnownAs().size() > 0) {
                 String joinedKnownAs = TextUtils.join(" / ", mSandwichSelected.getAlsoKnownAs());

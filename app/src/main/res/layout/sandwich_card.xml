@@ -7,6 +7,7 @@
     <ImageView
         android:id="@+id/iv_sandwich"
         android:scaleType="centerCrop"
+        android:contentDescription="@string/content_description_image_sandwich"
         android:layout_width="match_parent"
         android:layout_height="match_parent" />
     <TextView

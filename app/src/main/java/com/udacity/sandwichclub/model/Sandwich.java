@@ -91,7 +91,7 @@ public class Sandwich implements Parcelable {
     }
 
 
-    public Sandwich(Parcel in) {
+    private Sandwich(Parcel in) {
         this.mainName = in.readString();
         this.alsoKnownAs = in.createStringArrayList();
         this.placeOfOrigin = in.readString();
