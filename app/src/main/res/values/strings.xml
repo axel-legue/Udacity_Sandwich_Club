@@ -27,6 +27,7 @@
         <u><b>Description :</b></u> %1$s
                 ]]>
     </string>
+    <string name="content_description_image_sandwich">Picture that show the sandicwh</string>
 
     <string-array name="sandwich_names">
         <item>Ham and cheese sandwich</item>
