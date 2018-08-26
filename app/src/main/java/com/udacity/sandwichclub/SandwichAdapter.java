@@ -8,6 +8,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import com.squareup.picasso.Picasso;
@@ -19,11 +20,17 @@ public class SandwichAdapter extends RecyclerView.Adapter<SandwichAdapter.Sandwi
 
     private List<Sandwich> sandwichList;
     private Context context;
+    private SandwicListener mSandwichListener;
+
+    public interface SandwicListener {
+        void onSandwichCliked(Sandwich sandwich);
+    }
 
 
-    public SandwichAdapter(List<Sandwich> sandwichList, Context context) {
+    public SandwichAdapter(List<Sandwich> sandwichList, Context context, SandwicListener sandwicListener) {
         this.sandwichList = sandwichList;
         this.context = context;
+        this.mSandwichListener = sandwicListener;
     }
 
     @NonNull
@@ -41,8 +48,15 @@ public class SandwichAdapter extends RecyclerView.Adapter<SandwichAdapter.Sandwi
             sandwichHolder.mSandiwchNameTextView.setText(sandwich.getMainName());
         }
         if (sandwich.getImage() != null && !TextUtils.isEmpty(sandwich.getImage())) {
-            Picasso.with(context).load(sandwich.getImage()).placeholder(R.mipmap.ic_launcher).into(sandwichHolder.mSandwichImageView);
+            Picasso.with(context).load(sandwich.getImage()).placeholder(R.drawable.placeholder).into(sandwichHolder.mSandwichImageView);
         }
+        sandwichHolder.mSandwichWrapper.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                mSandwichListener.onSandwichCliked(sandwich);
+            }
+        });
+
 
     }
 
@@ -53,13 +67,17 @@ public class SandwichAdapter extends RecyclerView.Adapter<SandwichAdapter.Sandwi
 
     class SandwichHolder extends RecyclerView.ViewHolder {
 
+        RelativeLayout mSandwichWrapper;
         ImageView mSandwichImageView;
         TextView mSandiwchNameTextView;
 
         SandwichHolder(@NonNull View itemView) {
             super(itemView);
+            mSandwichWrapper = itemView.findViewById(R.id.rl_sandwich_wrapper);
             mSandiwchNameTextView = itemView.findViewById(R.id.tv_main_name);
             mSandwichImageView = itemView.findViewById(R.id.iv_sandwich);
+
         }
+
     }
 }

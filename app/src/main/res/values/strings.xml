@@ -12,6 +12,21 @@
 
     <!-- Error messages-->
     <string name="detail_error_message">Sandwich data not available</string>
+    <string name="ingredients">
+        <![CDATA[
+        <u><b>Ingredients :</b></u> %1$s
+        ]]>
+    </string>
+    <string name="also_known_as">
+                <![CDATA[
+        <u>Also known as :</u> %1$s
+                ]]>
+    </string>
+    <string name="description">
+            <![CDATA[
+        <u><b>Description :</b></u> %1$s
+                ]]>
+    </string>
 
     <string-array name="sandwich_names">
         <item>Ham and cheese sandwich</item>
