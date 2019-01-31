@@ -1,7 +1,7 @@
-# Sandwich Club Project Starter Code
+# Sandwich Club Project
 
 ## Project Overview
-In this project, i will complete the **Sandwich Club** app to
+In this project, i complete the **Sandwich Club** app to
 show the details of each sandwich once it is selected.
 
 ## Look
