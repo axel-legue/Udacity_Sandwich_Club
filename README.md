@@ -4,16 +4,15 @@
 In this project, i will complete the **Sandwich Club** app to
 show the details of each sandwich once it is selected.
 
-## Why this Project
+## Look
+- Home Screen <br/>
+![Image](https://github.com/axel-legue/Udacity_Sandwich_Club/blob/master/home.png) <br/>
+- Detail Screen <br/>
+![Image](https://github.com/axel-legue/Udacity_Sandwich_Club/blob/master/detail.png)  <br/>
 
-Building a layout and populating its fields from data received as JSON
-is a common task for Android Developers. Although JSON parsing is usually
-done using libraries, writing the JSON parsing for  this project will
-help me to better understand how it is processed.
+## Contains
+- JSON parsing from file to model object
+- RecyclerView
+- CardView
 
-## What Will I Learn?
-Through this project, i will:
-- Learn how to submit projects for review
-- Practice JSON parsing to a model object
-- Design an activity layout
-- Populate all fields in the layout accordingly
+
